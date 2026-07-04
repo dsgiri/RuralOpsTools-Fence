@@ -1,0 +1,6 @@
+{
+  "name": "Field Fence Estimator",
+  "description": "Practical fence planning tool that helps estimate fence length, post count, wire length, and material cost for field boundaries.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
