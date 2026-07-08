@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import { Card, CardHeader, CardTitle, CardContent, CardDescription } from '@/src/components/ui/Card';
 import { Input } from '@/src/components/ui/Input';
 import { Label } from '@/src/components/ui/Label';
+import { FenceLineBuilder } from '@/src/components/FenceLineBuilder';
+import { trackEvent } from '@/src/lib/analytics';
 import { Select } from '@/src/components/ui/Select';
 import { Button } from '@/src/components/ui/Button';
 import { Info } from 'lucide-react';
@@ -122,7 +124,7 @@ export default function AcreageCalculator() {
         </div>
 
         <div>
-          <Card className="bg-[#1B3022] text-white border-[#1B3022] sticky top-24">
+          <Card className="bg-fence-iron text-white border-fence-iron sticky top-24">
             <CardHeader className="border-b border-white/10 pb-4">
               <CardTitle className="text-white">Estimated Materials</CardTitle>
               <CardDescription className="text-white/60">Based on a minimum perimeter square parcel.</CardDescription>
@@ -161,7 +163,7 @@ export default function AcreageCalculator() {
                   </div>
                   
                   <div className="pt-4 border-t border-white/10">
-                    <Button className="w-full bg-white text-[#1B3022] hover:bg-white/90" size="lg" onClick={() => window.print()}>
+                    <Button className="w-full bg-white text-fence-iron hover:bg-white/90" size="lg" onClick={() => window.print()}>
                       Print / Save Estimate
                     </Button>
                   </div>
@@ -177,9 +179,9 @@ export default function AcreageCalculator() {
       </div>
 
       <div className="mt-16 space-y-8 max-w-4xl">
-        <section className="bg-[#F8FAFC] p-6 rounded-xl border border-[#E2E8F0]">
-          <h2 className="text-xl font-bold text-[#1B3022] mb-4">How It Works</h2>
-          <ul className="list-disc pl-5 space-y-2 text-sm text-[#4B5563]">
+        <section className="bg-white/50 p-6 rounded-xl border border-fence-iron/20">
+          <h2 className="text-xl font-bold text-fence-iron mb-4">How It Works</h2>
+          <ul className="list-disc pl-5 space-y-2 text-sm text-fence-iron/80">
             <li><strong>Perimeter Calculation:</strong> Assumes a perfectly square parcel to find the absolute minimum boundary length (Perimeter = 4 × √Area).</li>
             <li><strong>Effective Wire Run:</strong> Subtracts total gate width from the perimeter.</li>
             <li><strong>Post Count:</strong> Divides effective run by post spacing and rounds up, adding corner and gate posts.</li>
@@ -187,37 +189,37 @@ export default function AcreageCalculator() {
           </ul>
         </section>
 
-        <section className="bg-[#F8FAFC] p-6 rounded-xl border border-[#E2E8F0]">
-          <h2 className="text-xl font-bold text-[#1B3022] mb-4">Assumptions & Disclaimer</h2>
-          <p className="text-sm text-[#6B7280] leading-relaxed">
+        <section className="bg-white/50 p-6 rounded-xl border border-fence-iron/20">
+          <h2 className="text-xl font-bold text-fence-iron mb-4">Assumptions & Disclaimer</h2>
+          <p className="text-sm text-fence-iron/60 leading-relaxed">
             This calculator assumes flat terrain and a perfectly square property shape. Real-world boundaries are rarely perfect squares and terrain variations (hills, dips) will require more materials and tighter post spacing. We recommend adding a 5-10% contingency to your final material order. This tool provides preliminary estimates and is not a substitute for a professional survey or contractor quote.
           </p>
         </section>
 
-        <section className="bg-[#F8FAFC] p-6 rounded-xl border border-[#E2E8F0]">
-          <h2 className="text-xl font-bold text-[#1B3022] mb-4">Frequently Asked Questions</h2>
+        <section className="bg-white/50 p-6 rounded-xl border border-fence-iron/20">
+          <h2 className="text-xl font-bold text-fence-iron mb-4">Frequently Asked Questions</h2>
           <div className="space-y-4">
             <div>
-              <h3 className="font-semibold text-[#1A1C1E]">Why does acreage assume a square shape?</h3>
-              <p className="text-sm text-[#4B5563] mt-1">A square yields the smallest possible perimeter for a given area. This gives you the baseline minimum materials needed. A long, narrow rectangular field of the same acreage will require significantly more fencing.</p>
+              <h3 className="font-semibold text-fence-iron">Why does acreage assume a square shape?</h3>
+              <p className="text-sm text-fence-iron/80 mt-1">A square yields the smallest possible perimeter for a given area. This gives you the baseline minimum materials needed. A long, narrow rectangular field of the same acreage will require significantly more fencing.</p>
             </div>
             <div>
-              <h3 className="font-semibold text-[#1A1C1E]">Do I need to account for gates?</h3>
-              <p className="text-sm text-[#4B5563] mt-1">Yes. The calculator automatically subtracts gate widths from your total wire run, but adds the necessary heavy-duty posts to support those gates.</p>
+              <h3 className="font-semibold text-fence-iron">Do I need to account for gates?</h3>
+              <p className="text-sm text-fence-iron/80 mt-1">Yes. The calculator automatically subtracts gate widths from your total wire run, but adds the necessary heavy-duty posts to support those gates.</p>
             </div>
           </div>
         </section>
 
-        <section className="bg-[#F8FAFC] p-6 rounded-xl border border-[#E2E8F0]">
-          <h2 className="text-xl font-bold text-[#1B3022] mb-4">Related Tools</h2>
+        <section className="bg-white/50 p-6 rounded-xl border border-fence-iron/20">
+          <h2 className="text-xl font-bold text-fence-iron mb-4">Related Tools</h2>
           <div className="grid sm:grid-cols-2 gap-4">
-            <Link to="/perimeter" className="block p-4 bg-white border border-[#DDE2E6] rounded-lg hover:border-[#9CA3AF] transition-colors">
-              <h3 className="font-semibold text-[#1B3022]">Perimeter Estimator</h3>
-              <p className="text-xs text-[#6B7280] mt-1">Calculate materials from an exact perimeter length.</p>
+            <Link to="/perimeter" onClick={() => trackEvent('calculator_flow_progressed', { from: 'acreage', to: 'perimeter' })} className="block p-4 bg-white border border-fence-iron/20 rounded-lg hover:border-fence-iron/40 transition-colors">
+              <h3 className="font-semibold text-fence-iron">Perimeter Estimator</h3>
+              <p className="text-xs text-fence-iron/60 mt-1">Calculate materials from an exact perimeter length.</p>
             </Link>
-            <Link to="/cost" className="block p-4 bg-white border border-[#DDE2E6] rounded-lg hover:border-[#9CA3AF] transition-colors">
-              <h3 className="font-semibold text-[#1B3022]">Cost Estimator</h3>
-              <p className="text-xs text-[#6B7280] mt-1">Estimate total material and labor costs.</p>
+            <Link to="/cost" onClick={() => trackEvent('calculator_flow_progressed', { from: 'acreage', to: 'cost' })} className="block p-4 bg-white border border-fence-iron/20 rounded-lg hover:border-fence-iron/40 transition-colors">
+              <h3 className="font-semibold text-fence-iron">Cost Estimator</h3>
+              <p className="text-xs text-fence-iron/60 mt-1">Estimate total material and labor costs.</p>
             </Link>
           </div>
         </section>

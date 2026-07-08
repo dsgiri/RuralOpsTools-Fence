@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import { Card, CardHeader, CardTitle, CardContent, CardDescription } from '@/src/components/ui/Card';
 import { Input } from '@/src/components/ui/Input';
 import { Label } from '@/src/components/ui/Label';
+import { FenceLineBuilder } from '@/src/components/FenceLineBuilder';
+import { trackEvent } from '@/src/lib/analytics';
 import { Select } from '@/src/components/ui/Select';
 import { Button } from '@/src/components/ui/Button';
 
@@ -113,7 +115,7 @@ export default function PerimeterCalculator() {
         </div>
 
         <div>
-          <Card className="bg-[#1B3022] text-white border-[#1B3022] sticky top-24">
+          <Card className="bg-fence-iron text-white border-fence-iron sticky top-24">
             <CardHeader className="border-b border-white/10 pb-4">
               <CardTitle className="text-white">Estimated Materials</CardTitle>
               <CardDescription className="text-white/60">Based on a known perimeter length.</CardDescription>
@@ -145,7 +147,7 @@ export default function PerimeterCalculator() {
                   </div>
                   
                   <div className="pt-4 border-t border-white/10">
-                    <Button className="w-full bg-white text-[#1B3022] hover:bg-white/90" size="lg" onClick={() => window.print()}>
+                    <Button className="w-full bg-white text-fence-iron hover:bg-white/90" size="lg" onClick={() => window.print()}>
                       Print / Save Estimate
                     </Button>
                   </div>
@@ -161,46 +163,46 @@ export default function PerimeterCalculator() {
       </div>
 
       <div className="mt-16 space-y-8 max-w-4xl">
-        <section className="bg-[#F8FAFC] p-6 rounded-xl border border-[#E2E8F0]">
-          <h2 className="text-xl font-bold text-[#1B3022] mb-4">How It Works</h2>
-          <ul className="list-disc pl-5 space-y-2 text-sm text-[#4B5563]">
+        <section className="bg-white/50 p-6 rounded-xl border border-fence-iron/20">
+          <h2 className="text-xl font-bold text-fence-iron mb-4">How It Works</h2>
+          <ul className="list-disc pl-5 space-y-2 text-sm text-fence-iron/80">
             <li><strong>Effective Wire Run:</strong> Subtracts the total width of all gates from your total perimeter.</li>
             <li><strong>Post Count:</strong> Divides the effective run by your chosen post spacing (rounded up), then adds your specified corner and gate posts.</li>
             <li><strong>Wire Rolls:</strong> Multiplies the effective run by the number of strands, then divides by the roll length (rounded up).</li>
           </ul>
         </section>
 
-        <section className="bg-[#F8FAFC] p-6 rounded-xl border border-[#E2E8F0]">
-          <h2 className="text-xl font-bold text-[#1B3022] mb-4">Assumptions & Disclaimer</h2>
-          <p className="text-sm text-[#6B7280] leading-relaxed">
+        <section className="bg-white/50 p-6 rounded-xl border border-fence-iron/20">
+          <h2 className="text-xl font-bold text-fence-iron mb-4">Assumptions & Disclaimer</h2>
+          <p className="text-sm text-fence-iron/60 leading-relaxed">
             This calculator assumes you have an accurate measurement of your property's boundary. It assumes flat terrain; elevation changes will increase the actual amount of wire needed. We recommend adding a 5-10% contingency to your material order to account for terrain, waste, and splicing. This estimate is for planning purposes only.
           </p>
         </section>
 
-        <section className="bg-[#F8FAFC] p-6 rounded-xl border border-[#E2E8F0]">
-          <h2 className="text-xl font-bold text-[#1B3022] mb-4">Frequently Asked Questions</h2>
+        <section className="bg-white/50 p-6 rounded-xl border border-fence-iron/20">
+          <h2 className="text-xl font-bold text-fence-iron mb-4">Frequently Asked Questions</h2>
           <div className="space-y-4">
             <div>
-              <h3 className="font-semibold text-[#1A1C1E]">How do I measure my perimeter?</h3>
-              <p className="text-sm text-[#4B5563] mt-1">You can use GPS property mapping tools, a measuring wheel for smaller lots, or reference the linear distances on your official property survey.</p>
+              <h3 className="font-semibold text-fence-iron">How do I measure my perimeter?</h3>
+              <p className="text-sm text-fence-iron/80 mt-1">You can use GPS property mapping tools, a measuring wheel for smaller lots, or reference the linear distances on your official property survey.</p>
             </div>
             <div>
-              <h3 className="font-semibold text-[#1A1C1E]">What roll length should I choose?</h3>
-              <p className="text-sm text-[#4B5563] mt-1">Standard barbed wire often comes in 1,320 ft (1/4 mile) rolls. Woven wire usually comes in 330 ft rolls. Check with your local agricultural supplier for their stocked sizes.</p>
+              <h3 className="font-semibold text-fence-iron">What roll length should I choose?</h3>
+              <p className="text-sm text-fence-iron/80 mt-1">Standard barbed wire often comes in 1,320 ft (1/4 mile) rolls. Woven wire usually comes in 330 ft rolls. Check with your local agricultural supplier for their stocked sizes.</p>
             </div>
           </div>
         </section>
 
-        <section className="bg-[#F8FAFC] p-6 rounded-xl border border-[#E2E8F0]">
-          <h2 className="text-xl font-bold text-[#1B3022] mb-4">Related Tools</h2>
+        <section className="bg-white/50 p-6 rounded-xl border border-fence-iron/20">
+          <h2 className="text-xl font-bold text-fence-iron mb-4">Related Tools</h2>
           <div className="grid sm:grid-cols-2 gap-4">
-            <Link to="/acreage" className="block p-4 bg-white border border-[#DDE2E6] rounded-lg hover:border-[#9CA3AF] transition-colors">
-              <h3 className="font-semibold text-[#1B3022]">Acreage Estimator</h3>
-              <p className="text-xs text-[#6B7280] mt-1">Calculate boundary length from total acres.</p>
+            <Link to="/acreage" className="block p-4 bg-white border border-fence-iron/20 rounded-lg hover:border-fence-iron/40 transition-colors">
+              <h3 className="font-semibold text-fence-iron">Acreage Estimator</h3>
+              <p className="text-xs text-fence-iron/60 mt-1">Calculate boundary length from total acres.</p>
             </Link>
-            <Link to="/cost" className="block p-4 bg-white border border-[#DDE2E6] rounded-lg hover:border-[#9CA3AF] transition-colors">
-              <h3 className="font-semibold text-[#1B3022]">Cost Estimator</h3>
-              <p className="text-xs text-[#6B7280] mt-1">Estimate total material and labor costs.</p>
+            <Link to="/cost" onClick={() => trackEvent('calculator_flow_progressed', { from: 'perimeter', to: 'cost' })} className="block p-4 bg-white border border-fence-iron/20 rounded-lg hover:border-fence-iron/40 transition-colors">
+              <h3 className="font-semibold text-fence-iron">Cost Estimator</h3>
+              <p className="text-xs text-fence-iron/60 mt-1">Estimate total material and labor costs.</p>
             </Link>
           </div>
         </section>

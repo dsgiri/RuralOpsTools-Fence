@@ -1,1 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
+
+@theme {
+  --color-fence-iron: #3A3E36;
+  --color-rust-wire: #8C5A3C;
+  --color-pasture-cream: #EDE8DD;
+  --color-barbed-amber: #C2872E;
+  --color-danger-rust: #A8462F;
+  --color-graze-green: #5C7A5E;
+
+  --font-display: "Barlow Condensed", sans-serif;
+  --font-body: "Inter", sans-serif;
+  --font-mono: "IBM Plex Mono", monospace;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-pasture-cream);
+  color: var(--color-fence-iron);
+}

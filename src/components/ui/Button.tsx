@@ -10,11 +10,11 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant = 'default', size = 'default', asChild = false, ...props }, ref) => {
     const classes = cn(
-      "inline-flex items-center justify-center rounded-md text-sm font-semibold transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#1B3022] disabled:pointer-events-none disabled:opacity-50",
+      "inline-flex items-center justify-center rounded-md text-sm font-semibold transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-fence-iron disabled:pointer-events-none disabled:opacity-50",
       {
-        'bg-[#1B3022] text-white shadow-sm hover:bg-[#1B3022]/90': variant === 'default',
-        'border border-[#DDE2E6] bg-white hover:bg-[#F9FAFB] hover:text-[#1A1C1E]': variant === 'outline',
-        'hover:bg-[#F9FAFB] hover:text-[#1A1C1E]': variant === 'ghost',
+        'bg-fence-iron text-white shadow-sm hover:bg-fence-iron/90': variant === 'default',
+        'border border-fence-iron/20 bg-white hover:bg-white/50 hover:text-fence-iron': variant === 'outline',
+        'hover:bg-white/50 hover:text-fence-iron': variant === 'ghost',
         'h-9 px-4 py-2': size === 'default',
         'h-8 px-3 text-xs': size === 'sm',
         'h-10 px-8': size === 'lg',
